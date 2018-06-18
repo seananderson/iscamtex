@@ -1,0 +1,11 @@
+Package: iscamtex
+Version: 0.0.0.9000
+Title: Tex Helper Code for Iscam
+Description: Helper functions to make latex xtables and figures.
+Authors@R: person("Chris", "Grandin", email = "chris.grandin@dfo-mpo.gc.ca", role = c("aut", "cre"))
+License: GPL-2
+Encoding: UTF-8
+LazyData: true
+ByteCompile: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 6.0.1
