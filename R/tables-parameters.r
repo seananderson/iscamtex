@@ -217,7 +217,7 @@ make.parameters.table <- function(model,
 #'
 #' @param am1.lst A list containing the output from Herring model AM1
 #' @param am2.lst A list containing the output from Herring model AM2
-#' @param digits number of digits after decimal point
+#' @param digits Number of digits after decimal point
 #' @param xcaption Caption to appear in the calling document
 #' @param xlabel The label used to reference the table in latex
 #' @param font.size Size of the font for the table
@@ -1031,20 +1031,30 @@ make.variance.table <- function(var,
 
 #' Produce an xtable containing the catchability sensitivity values
 #'
-#' @param qa.lst
-#' @param qb.lst
-#' @param qc.lst
-#' @param digits
-#' @param xcaption
-#' @param xlabel
-#' @param font.size
-#' @param space.size
-#' @param placement
+#' @param qa.lst A list of AM1 models for Herring sensitivities for case A
+#' @param qb.lst A list of AM1 models for Herring sensitivities for case B
+#' @param qc.lst A list of AM1 models for Herring sensitivities for case C
+#' @param digits Number of digits after decimal point for the table
+#' @param xcaption Caption to appear in the calling document
+#' @param xlabel The label used to reference the table in latex
+#' @param font.size Size of the font for the table
+#' @param space.size Size of the vertical spaces for the table
+#' @param placement Latex code for placement of the table in document
 #'
-#' @return
+#' @details Catchability  parameters:
+#'   q is a data frame with 1 column for each survey and 3 rows:
+#'   1 - prior type:
+#'        0) Uniformative prior
+#'        1) normal prior density for log(q)
+#'        2) random walk in q
+#'   2 - prior log(mean)
+#'   3 - prior SD
+#'
+#' @return An xtable
 #' @export
 #'
 #' @examples
+#' \donttest
 make.catchability.parameters.table.q.sens <- function(qa.lst,
                                                       qb.lst,
                                                       qc.lst,
@@ -1054,22 +1064,6 @@ make.catchability.parameters.table.q.sens <- function(qa.lst,
                                                       font.size = 9,
                                                       space.size = 10,
                                                       placement = "H"){
-  ## qa.lst, qb.lst, and qc.lst are lists of the AM1 models for q sensitivities
-  ## xcaption - caption to appear in the calling document
-  ## digits - number of digits after decimal point
-  ## xlabel - the label used to reference the table in latex
-  ## font.size - size of the font for the table
-  ## space.size - size of the vertical spaces for the table
-  ## placement - latex code for placement of the table in document
-
-  ## Catchability  parameters
-  ## q is a data frame with 1 column for each survey and 3 rows:
-  ## 1 - prior type:
-  ##      0) Uniformative prior
-  ##      1) normal prior density for log(q)
-  ##      2) random walk in q
-  ## 2 - prior log(mean)
-  ## 3 - prior SD
 
   lst <- list()
   st <- c("HG", "PRD", "CC", "SOG", "WCVI")

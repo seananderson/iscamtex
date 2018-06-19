@@ -1,13 +1,26 @@
+#' Build the doc entirely from within R
+#'
+#' @param knit.only Only run knitr, not latex
+#' @param make.pdf TRUE to make the pdf, if FALSE it will only go as far as
+#'   postscript.
+#' @param doc.name Name of the document without extension
+#'
+#' @details Build the doc entirely from within R.
+#'   Make sure you have created the .RData files by sourcing all.r
+#'   with the create.rdata.file variables set to TRUE.
+#'   Once you have done that and run this function once within an R session,
+#'   you can go into the first knitr code chunk in hake-assessment.rnw and
+#'   set the call to load.models.into.parent.env() to FALSE,
+#'   which will save time for doing the build.
+#'
+#' @return Nothing
+#' @export
+#'
+#' @examples
+#' \donttest
 build.doc <- function(knit.only = FALSE,
                       make.pdf  = TRUE,
                       doc.name  = "hake-assessment"){
-  ## Use this function to build to doc entirely from within R
-  ## Make sure you have created the .RData files by sourcing all.r
-  ##  with the create.rdata.file variables set to TRUE.
-  ## Once you have done that and run this function once within an R session,
-  ##  you can go into the first knitr code chunk in hake-assessment.rnw and
-  ##  set the call to load.models.into.parent.env() to FALSE,
-  ##  which will save time for doing the build.
   ##
   ## knit.only - Only run knitr, not latex
   ## make.pdf - TRUE to make the pdf, if FALSE it will only go as far as
@@ -36,20 +49,38 @@ build.doc <- function(knit.only = FALSE,
   }
 }
 
+#' Format x to have supplied number of decimal points
+#'
+#' @param x The value to format
+#' @param dec.points Number of digits after decimal point
+#'
+#' @details Format x to have supplied number of decimal points.
+#'   Make thousands seperated by commas and the number of decimal points given by
+#'   dec.points. Strip away any asterisks.
+#'
+#' @return A string representing the formatted value
+#' @export
+#'
+#' @examples
+#' \donttest
 f <- function(x, dec.points = 0){
-  ## Format x to have supplied number of decimal points
-  ## Make thousands seperated by commas and the number of decimal points given by
-  ##  dec.points. Strip away any asterisks
-  format(round(x,dec.points),
+  format(round(x, dec.points),
          big.mark = ",",
          nsmall = dec.points)
 }
 
+#' Remove any asterisks found in the given data frame x
+#'
+#' @param x A data frame
+#'
+#' @return List of length 2, first is data frame without
+#'   asterisks, second is matrix of TRUE for for position
+#'   so that the asterisks can be reapplied after formatting.
+#' @export
+#'
+#' @examples
+#' \donttest
 remove.asterisks <- function(x){
-  ## Remove any asterisks found in the given data frame x
-  ##  and return list of 2, first is data frame without
-  ##  asterisks, second is matrix of TRUE for for position
-  ##  so that the asterisks can be reapplied after formatting.
 
   list(apply(x,
              c(1,2),
@@ -59,6 +90,18 @@ remove.asterisks <- function(x){
        apply(x, c(1,2), function(y)grep("\\*+", y)))
 }
 
+#' Add two asterisks to the data frame in the positions
+#' given by matrix w
+#' @param x A data frame
+#' @param w A data frame where 1's represent positions to add asterisks to
+#'
+#' @details The data frame x and matrix w must be the same dimensions
+#'
+#' @return
+#' @export
+#'
+#' @examples
+#' \donttest
 add.asterisks <- function(x, w){
   ## Add two asterisks to the data frame in the positions
   ##  given by matrix 'where' (w)
@@ -78,50 +121,127 @@ latex.nline <- " \\\\ "
 ## Horizontal line
 latex.hline <- " \\hline "
 
+#' Escape percent signs properly with \\ for input to latex
+#'
+#' @param vec A vector of strings
+#'
+#' @return The input vector with all instances of % escaped properly for
+#'   xtable code - \\\\
+#' @export
+#'
+#' @examples
+#' \donttest
 latex.perc <- function(vec){
-  ## Return the input vector with all instances of % escaped properly for
-  ##  xtable code - \\\\
+
   gsub("%", "\\\\%", vec)
 }
 
+#' Make a string of whitespace-padded ampersands
+#'
+#' @param n Number of ampersands in the string
+#'
+#' @return A string with n ampersands seperated by spaces. The string will
+#'   have one leading and one trailing space.
+#' @export
+#'
+#' @examples
+#' \donttest
 latex.amp <- function(n = 1){
-  ## Returns a string with n ampersands seperated by spaces. The string will
-  ##  have one leading and one trailing space.
+
   paste0(rep(" &", n), " ", collapse = "")
 }
 
+#' Make an ampersand-seperated string
+#'
+#' @param vec A vector of the strings to seperate with ampersands
+#'
+#' @return A string comprised of each element in the vector vec with an
+#'   ampersand in between. The string will have one leading and one
+#'   trailing space.
+#' @export
+#'
+#' @examples
+#' \donttest
 latex.paste <- function(vec){
-  ## Returns a string comprised of each element in the vector vec with an
-  ##  ampersand in between. The string will have one leading and one
-  ##  trailing space.
+
   paste(" ", vec, " ", collapse = " & ")
 }
 
+#' Make a latex bold text string
+#'
+#' @param txt The text to make bold
+#'
+#' @return The given text with the latex \\textbf{} macro around it
+#' @export
+#'
+#' @examples
+#' \donttest
 latex.bold <- function(txt){
-  ## Returns the given text with the latex \\textbf{} macro around it
+
   paste0("\\textbf{", txt, "}")
 }
 
+#' Make a latex bold math string
+#'
+#' @param txt A string of the math to make bold
+#'
+#' @return The given text with the latex \\mathbf{} macro and the
+#'   dollar signs around it
+#' @export
+#'
+#' @examples
+#' \donttest
 latex.math.bold <- function(txt){
-  ## Returns the given text with the latex \\mathbf{} macro and the
-  ##  dollar signs around it
+
   paste0("$\\mathbf{", txt, "}$")
 }
 
+#' Make a latex italics math string
+#'
+#' @param txt The text to italicize
+#'
+#' @return The given text with the latex \\emph{} macro around it
+#' @export
+#'
+#' @examples
+#' \donttest
 latex.italics <- function(txt){
-  ## Returns the given text with the latex \\emph{} macro around it
+
   paste0("\\emph{", txt, "}")
 }
 
+#' Make an underlining latex string
+#'
+#' @param txt The text to underline
+#'
+#' @return The given text with the latex \\underline{} macro around it
+#' @export
+#'
+#' @examples
+#' \donttest
 latex.under <- function(txt){
-  ## Returns the given text with the latex \\underline{} macro around it
+
   paste0("\\underline{", txt, "}")
 }
 
+#' Create a latex string for a multi-line-cell
+#'
+#' @param latex.vec A vector of strings to put into a multi-line-cell. One for each
+#'   line.
+#' @param make.bold Make all the text bold
+#' @param math.bold If it's math, make the math bold
+#'
+#' @details If make.bold is TRUE, the \textbf macro will be
+#'  inserted unless math.bold is TRUE, then \\mathbf macro will be used
+#'
+#' @return A string which has been glued together using multi-line-cell
+#'   macro for latex.
+#' @export
+#'
+#' @examples
+#' \donttest
 latex.mlc <- function(latex.vec, make.bold = TRUE, math.bold = FALSE){
-  ## Returns a string which has been glued together using multi-line-cell
-  ##  macro for latex. If make.bold is TRUE, the \textbf macro will be
-  ##  inserted unless math.bold is TRUE, then \\mathbf macro will be used
+
   if(make.bold){
     if(math.bold){
       latex.vec <- sapply(latex.vec, latex.math.bold)
@@ -133,18 +253,36 @@ latex.mlc <- function(latex.vec, make.bold = TRUE, math.bold = FALSE){
   paste0("\\mlc{", latex.str, "}")
 }
 
+#' Make a latex string for mulicolumns
+#'
+#' @param ncol The number of columns
+#' @param just Justification, e.g. "l", "c", or "r" for left, center, right
+#' @param txt The string to span the columns
+#'
+#' @return The given text with the latex \\multicolumn{} macro around it
+#' @export
+#'
+#' @examples
+#' \donttest
 latex.mcol <- function(ncol, just, txt){
-  ## Returns the given text with the latex \\multicolumn{} macro around it
-  ## ncol - the number of columns
-  ## just - justification, e.g. "l", "c", or "r" for left, center, right
+
   paste0("\\multicolumn{", ncol, "}{", just, "}{", txt, "}")
 }
 
+#' Make a latex string for multirows
+#'
+#' @param nrow The number of rows the text will span
+#' @param just Justification, e.g. "l", "c", or "r" for left, center, right
+#' @param txt The string to span the rows
+#' @param option Optional argument for multirow. See latex documentation.
+#'
+#' @return The given text with the latex \\multirow{} macro around it
+#' @export
+#'
+#' @examples
+#' \donttest
 latex.mrow <- function(nrow, just, txt, option = NULL){
-  ## Returns the given text with the latex \\multicolumn{} macro around it
-  ## nrow - the number of rows
-  ## just - justification, e.g. "l", "c", or "r" for left, center, right
-  ## option - optional argument for multirow
+
   if(is.null(option)){
     paste0("\\multirow{", nrow, "}{", just, "}{", txt, "}")
   }else{
@@ -152,51 +290,120 @@ latex.mrow <- function(nrow, just, txt, option = NULL){
   }
 }
 
+#' Make a latex string which for font size and space size
+#'
+#' @param fnt.size Size of font
+#' @param spc.size Amount of vertical space, in same units as font size
+#'
+#' @return A string which has the given font size and space size applied
+#' @export
+#'
+#' @examples
+#' \donttest
 latex.size.str <- function(fnt.size, spc.size){
-  ## Returns a string which has the given font size and space size applied
+
   paste0("\\fontsize{", fnt.size, "}{", spc.size, "}\\selectfont")
 }
 
+#' Make the latex string to draw a horizontal line across the columns specified
+#' using cline latex command
+#'
+#' @param cols A string in this format: "1-3" which means
+#'   the line should go across columns 1 to 3
+#'
+#' @return The latex string to draw a horizontal line across the columns specified
+#' @export
+#'
+#' @examples
+#' \donttest
 latex.cline <- function(cols){
-  ## Draw a horizontal line across the columns specified
-  ## cols - a string in this format: "1-3" which means
-  ##  the line should go across columns 1 to 3.
+
   paste0("\\cline{", cols, "}")
 }
 
+#' Make the latex string to draw a horizontal line across the columns specified
+#' using cmidrule latex command
+#'
+#' @param cols A string in this format: "1-3" which means
+#'   the line should go across columns 1 to 3
+#' @param trim Can be l, r, or lr and tells it to trim the
+#'   line a bit so that if there are two lines they don't
+#'   touch in the middle. See latex booktabs package
+#'
+#' @return the latex string to draw a horizontal line across the columns specified
+#' @export
+#'
+#' @examples
+#' \donttest
 latex.cmidr <- function(cols, trim = "r"){
-  ## Draw a horizontal line across the columns specified
-  ## cols - a string in this format: "1-3" which means
-  ##  the line should go across columns 1 to 3.
-  ## trim - can be l, r, or lr and tells it to trim the
-  ##  line a bit so that if there are two lines they don't
-  ##  touch in the middle. (See booktabs package)
+
   paste0("\\cmidrule(", trim, "){", cols, "}")
 }
 
+#' Make a latex string with main.txt subscripted by subscr.txt
+#'
+#' @param main.txt The normal sized text
+#' @param subscr.txt The subscript to apply to main.txt
+#'
+#' @return A latex string with main.txt subscripted by subscr.txt
+#' @export
+#'
+#' @examples
+#' \donttest
 latex.subscr <- function(main.txt, subscr.txt){
-  ## Returns a latex string with main.txt subscripted by subscr.txt
+
   paste0(main.txt, "\\subscr{", subscr.txt, "}")
 }
 
+#' Make a latex string with main.txt subscripted by subscr.txt
+#' where only main.txt is italicised
+#'
+#' @param main.txt The normal sized text
+#' @param subscr.txt The subscript to apply to main.txt
+#'
+#' @return A latex string with main.txt subscripted by subscr.txt
+#'   where only main.txt is italicised
+#' @export
+#'
+#' @examples
+#' \donttest
 latex.subscr.ital <- function(main.txt, subscr.txt){
-  ## Returns a latex string with main.txt subscripted by subscr.txt
-  ##  where only main.txt is italicised
+
   paste0("\\emph{", main.txt, "}\\subscr{", subscr.txt, "}")
 }
 
+#' Make a latex string with main.txt superscripted by supscr.txt
+#'
+#' @param main.txt The normal sized text
+#' @param supscr.txt The superscript to apply to main.txt
+#'
+#' @return
+#' @export
+#'
+#' @examples
 latex.supscr <- function(main.txt, supscr.txt){
-  ## Returns a latex string with main.txt superscripted by supscr.txt
+
   paste0(main.txt, "\\supscr{", supscr.txt, "}")
 }
 
 ## -----------------------------------------------------------------------------
 
+#' Calculate the column quantiles for the data frame
+#'
+#' @param data A data frame
+#' @param probs Probabilities to use. See quantile() function
+#'
+#' @return A vector of the column quantiles for the data frame
+#' @export
+#'
+#' @details The median along with the confidence interval 'ci'
+#'   will be calculated and the quantiles returned.
+#'
+#' @examples
+#' \donttest
 get.quants <- function(data,
                        probs){
-  ## Return the column quantiles for data matrix.
-  ## The median along with the confidence interval 'ci'
-  ## will be calculated and the quantiles returned.
+
   if(is.null(dim(data))){
     ## It is a single posterior, e.g. sbo
     quants <- quantile(data, probs)
@@ -207,20 +414,37 @@ get.quants <- function(data,
   quants
 }
 
+#' Install a package if it isn't already
+#'
+#' @param package.name Name of the package as a string
+#'
+#' @return Nothing
+#' @export
+#'
+#' @examples
+#' \donttest
 install.packages.if.needed <- function(package.name){
+
   if(!(package.name %in% rownames(installed.packages()))){
     install.packages(package.name)
   }
 }
 
+#' Get priors information from prior.str
+#'
+#' @param prior.str A string like "Lognormal(2.0,1.01)"
+#' @param dec.points Number of decimal points to use
+#' @param first.to.lower If TRUE, makes the first letter of the name of the prior lower case
+#'
+#' @return A vector of length 3. e.g. "Lognormal", 2.0, 1.01
+#' @export
+#'
+#' @examples
+#' \donttest
 split.prior.info <- function(prior.str,
                              dec.points = 1,
                              first.to.lower = FALSE){
-  ## Get priors information from prior.str which is a string like
-  ## Lognormal(2.0,1.01)
-  ## Returns a vector of length 3:
-  ## "Lognormal", 2.0, 1.01
-  ## if first.to.lower = TRUE, makes the first letter of the name of the prior lower case.
+
   p <- strsplit(prior.str, "\\(")[[1]]
   if(first.to.lower){
     ## Make the name of the prior lower case
@@ -233,7 +457,24 @@ split.prior.info <- function(prior.str,
   return(c(p.type, p.mean, p.sd))
 }
 
+#' Calculate the catch weight of a given cohort by year
+#'
+#' @param cohort The year of the cohort
+#' @param catage A catch-at-age data frame in the format of iscam
+#'   model object, i.e. model$catage
+#' @param ages A vector of the ages for the cohort
+#'
+#' @return A vector of the catch weight by year for the given cohort
+#' @export
+#'
+#' @details Uses the weight-at-age for the cohort by year as a multiplier
+#'   with the catch-at-age as found in the iscam model
+#'   object. i.e. model$wtatage
+#'
+#' @examples
+#' \donttest
 cohortCatch <- function(cohort, catage, ages = 0:20) {
+
   cohort.yrs <- cohort + ages
   caa <- as.matrix(catage[catage$Yr %in% cohort.yrs, as.character(ages)])
   w <- base.model$wtatage
@@ -248,34 +489,59 @@ cohortCatch <- function(cohort, catage, ages = 0:20) {
   }
   cohort.catch <- diag(catch.waa[,ind])
   names(cohort.catch) <- cohort.yrs[1:(nrow(caa))]
-  return(cohort.catch)
+  cohort.catch
 }
 
+#' Calculate the age proportions and the age itself for the
+#' cohort with the highest, second highest, etc values.
+#' Used to find the highest proportion cohort typically
+#'
+#' @param vec A vector of the age proportions for a given year
+#' @param place Which value to return, i.e. 1 = highest value,
+#'   2 = second highest, etc.
+#'
+#' @return
+#' @export
+#'
+#' @examples
 get.age.prop <- function(vec, place = 1){
-  ## returns the age prop and the age itself for the place,
-  ## where place is 1=max, 2-second highest, etc.
+
   prop <- rev(sort(vec))
   prop <- prop[place]
   age <- as.numeric(names(vec[vec == prop]))
   return(c(age, prop))
 }
 
+#' Make a vector of RGB strings of the specified color and opacity
+#'
+#' @param color The R color to use
+#' @param opacity The opaqueness of the resulting color from 0 to 99
+#'
+#' @details If color is a single R color string or single number,
+#'   returns an rgb string of the specified color and opacity
+#'   If color is a vector of cR color strings or numbers,
+#'   returns a vector of rgb strings of the specified color and opacity.
+#'   If the opacity argument is non-integer or not between 0 and 99, NULL will be returned.
+#'   - opacity - 2-decimal-digit string (00-99), i.e. "20" means 20%
+#'   Notes: format of returned string is #RRGGBBAA
+#'          where RR=red, a 2-hexadecimal-digit string
+#'          GG=green, a 2-hexadecimal-digit string
+#'          BB=blue, a 2-hexadecimal-digit string
+#'          AA=alpha or opacity
+#'
+#'   The opacity agrument is scalar and will be applied to all colors.
+
+#'
+#'
+#' @return A vector of rgb strings of the specified color and opacity
+#' @export
+#'
+#' @examples
+#' \donttest
 get.shade <- function(color, opacity){
-  # If color is a single R color string or single number,
-  #  returns an rgb string of the specified color and opacity
-  # If color is a vector of cR color strings or numbers,
-  #  returns a vector of rgb strings of the specified color and opacity.
-  # If the opacity argument is non-integer or not between 0 and 99, NULL will be returned.
-  # - opacity - 2-decimal-digit string (00-99), i.e. "20" means 20%
-  # Notes: format of returned string is #RRGGBBAA
-  #        where RR=red, a 2-hexadecimal-digit string
-  #        GG=green, a 2-hexadecimal-digit string
-  #        BB=blue, a 2-hexadecimal-digit string
-  #        AA=alpha or opacity
-  #
-  # The opacity agrument is scalar and will be applied to all colors.
+
   if(!(opacity %% 1 == 0) || opacity<0 || opacity>99){
-    cat0(.PROJECT_NAME,"->",currFuncName,"opacity argument must be an integer between 0 and 99.")
+    warning("opacity argument must be an integer between 0 and 99.")
     return(NULL)
   }
   colorDEC <- col2rgb(color)
@@ -300,13 +566,21 @@ get.shade <- function(color, opacity){
     }
     shade <- paste0("#",colorHEX[1],colorHEX[2],colorHEX[3],opacity)
   }
-  return(shade)
+  shade
 }
 
+#' Remove all objects in the workspace except the ones in the vars list
+#'
+#' @param vars The objects to keep
+#'
+#' @details Upon finishing, the workspace will contain whatever is in the vars list,
+#'   plus the object 'remove.all.objects.except' (this function)
+#' @return Nothing
+#' @export
+#'
+#' @examples
+#' \donttest
 remove.all.objects.except <- function(vars){
-  # Removes every object in the workspace except for what is in the vars list.
-  # Upon finishing, the workspace will contain whatever is in the vars list,
-  #  plus the object 'remove.all.objects.except' (this function)
 
   vars <- c(vars, "remove.all.objects.except")
   keep <- match(x = vars, table = ls(all = TRUE, envir = .GlobalEnv))
@@ -315,27 +589,43 @@ remove.all.objects.except <- function(vars){
   }
 }
 
+#' Prepend the given number with zeros
+#'
+#' @param num The number as a numeric
+#' @param digits The number of digits that the resulting string will have
+#'
+#' @details If the string is less than digits long, it will
+#' be prepended with zeroes
+#'
+#' @return A string with the number prepended with zeros
+#' @export
+#'
+#' @examples
+#' cat("pad.num(0, 1) = ", pad.num(0, 1), "\n")
+#' cat("pad.num(1, 2) = ", pad.num(1, 2), "\n")
+#' cat("pad.num(10, 2) = ", pad.num(10, 2), "\n")
+#' cat("pad.num(10, 3) = ", pad.num(10, 3), "\n")
+#' cat("pad.num(10, 0) = ", pad.num(10, 0), "\n")
 pad.num <- function(num, digits = 0){
-  ## Takes an integer, num and turns it into a string
-  ## If the string is less than digits long, it will
-  ## be prepended with zeroes
+
   if(digits < 1) stop("Error in pad.num - digits must be positive\n")
-  sapply(num, function(x){ paste0(rep("0", digits - nchar(as.character(x))), as.character(x))})
+  sapply(num, function(x){paste0(rep("0", digits - nchar(as.character(x))), as.character(x))})
 }
 
-t.pn <- function(){
-  ## test pad.num
-  cat("pad.num(0, 1) = ", pad.num(0, 1), "\n")
-  cat("pad.num(1, 2) = ", pad.num(1, 2), "\n")
-  cat("pad.num(10, 2) = ", pad.num(10, 2), "\n")
-  cat("pad.num(10, 3) = ", pad.num(10, 3), "\n")
-  cat("pad.num(10, 0) = ", pad.num(10, 0), "\n")
-}
-
+#' Print out a message stating the model directory names and pretty names
+#'
+#' @param model.dir.names The names of the models' directories
+#' @param model.names The pretty name of the models
+#' @param group The group number to use as defined in iscam
+#' @param model.type "Bridge" or "Sensitivity" or any string you want to use
+#'   to describe the type
+#'
+#' @return Nothing
+#' @export
+#'
+#' @examples
+#' \donttest
 print.model.message <- function(model.dir.names, model.names, group, model.type){
-  ## Print out a message stating the model directory names and pretty names,
-  ##  for the group number given. If bridge is TRUE, it is a bridge model group,
-  ##  if bridge is FALSE, it is a sensitivity model group.
 
   cat0("***")
   cat0(model.type, " model group ", group, " directories: ")
@@ -345,14 +635,28 @@ print.model.message <- function(model.dir.names, model.names, group, model.type)
   cat0("***")
 }
 
+#' Get the current function name from within the function itself
+#'
+#' @param skipframes Number of call stack frames to skip. Leave at 0 to get current
+#'   function name. If you make a wrapper function, it should call this with
+#'   skipframes = 1 to avoid the wrapper function name being returned
+#' @param skipnames Used to ensure a function name is retrieved
+#' @param ret.if.none What to write if called from outside a function
+#' @param ret.stack If TRUE, return the call stack as a string
+#' @param extra.perf.per.level What string to prepend to the return val n times where
+#'   n is the number of functions in the call stack
+#'
+#' @return The current function's name
+#' @export
+#'
+#' @examples
+#' \donttest
 curr.fn.finder <- function(skipframes = 0,
                            skipnames = "(FUN)|(.+apply)|(replicate)",
                            ret.if.none = "Not in function",
                            ret.stack = FALSE,
                            extra.perf.per.level = "\t"){
-  ## Get the current function name from within the function itself.
-  ## Used to prepend the function name to all messages so that the
-  ## user knows where the message came from.
+
   prefix <- sapply(3 + skipframes + 1:sys.nframe(), function(i){
     currv <- sys.call(sys.parent(n = i))[[1]]
     return(currv)
@@ -372,8 +676,15 @@ curr.fn.finder <- function(skipframes = 0,
   }
 }
 
+#' Get the calling function's name followed by ": "
+#'
+#' @return The calling function's name followed by ": "
+#' @export
+#'
+#' @examples
+#' \donttest
 get.curr.func.name <- function(){
-  ## Returns the calling function's name followed by ": "
+
   func.name <- curr.fn.finder(skipframes = 1) # skipframes=1 is there to avoid returning getCurrFunc itself
   ## Strip extraneous whitespace
   func.name <- gsub("\t+", "", func.name)
@@ -382,19 +693,38 @@ get.curr.func.name <- function(){
   return(func.name)
 }
 
+#' Wrapper function to make cat have no space and insert a newline at the end
+#'
+#' @param ...
+#'
+#' @return A string with no space and a newline inserted at the end. Like paste0()
+#' @export
+#'
+#' @examples
+#' \donttest
 cat0 <- function(...){
-  ## Wrapper function to make cat have no space and insert a newline at the end.
-  ## Inspired by the paste0 function.
+
   cat(..., "\n", sep = "")
 }
 
+#' Make a string representing the English spelling of a given number
+#'
+#' @param x The number to use
+#' @param th Include a 'th' after the end. e.g. tenth, twelvth, ninetieth
+#' @param cap.first Capitalize the first letter
+#'
+#' @details All special cases work, e.g. returns ninetieth not ninetyeth
+#'
+#' @return a string representing the English spelling of a given number
+#' @export
+#'
+#' @examples
+#' number.to.word(909)
+#' number.to.word(90, TRUE)
+#' number.to.word(1000000, TRUE)
+#' number.to.word(100000, TRUE)
 number.to.word <- function(x, th = FALSE, cap.first = FALSE){
-  ## https://github.com/ateucher/useful_code/blob/master/R/numbers2words.r
-  ## Function by John Fox found here:
-  ## http://tolstoy.newcastle.edu.au/R/help/05/04/2715.html
-  ## Tweaks by AJH to add commas and "and"
-  ## if th is TRUE, the th version will be returned, e.g. 4 = fourth
-  ## if cap.first is TRUE, the first letter will be capitalized
+
   helper <- function(x){
     digits <- rev(strsplit(as.character(x), "")[[1]])
     nDigits <- length(digits)
@@ -543,8 +873,17 @@ set.elems <- function(...) {
   return(list.tmp)
 }
 
+#' Equivalent of cbind(df, xx) for case where df is an empty data frame
+#'
+#' @param ...
+#'
+#' @return A data frame with column xx bound to it
+#' @export
+#'
+#' @examples
+#' \donttest
 cbind.fill <- function(...){
-  ## equivalent of cbind(df, xx) where df is an empty data frame.
+
   nm <- list(...)
   nm <- lapply(nm, as.matrix)
   n <- max(sapply(nm, nrow))
@@ -552,20 +891,37 @@ cbind.fill <- function(...){
     rbind(x, matrix(, n-nrow(x), ncol(x)))))
 }
 
+#' Remove specific columns from a vector
+#'
+#' @param vec A vector with names set
+#' @param names A vector of names to remove from vec
+#'
+#' @return A vector with some elements removed
+#' @export
+#'
+#' @examples
+#' \donttest
 strip.columns <- function(vec, names){
-  ## Return a vector which is the same as the vector 'vec'
-  ## but with the matching col.names removed
-  return(vec[!names(vec) %in% names])
+
+  vec[!names(vec) %in% names]
 }
 
+#' Make a character vector for use as the align argument of the xtable command
+#'
+#' @param num The number of columns in the table
+#' @param first.left TRUE/FALSE to justify the first column left
+#' @param just Justification of the table, including the first column if
+#'   first.left is FALSE. Can be any of  "r", "l", or "c"
+#'
+#' @return A character vector of the justifications for the latex xtable
+#' @export
+#'
+#' @examples
+#' \donttest
 get.align <- function(num,
-                      first.left = TRUE, ## Keep the first column left-justified
-                                         ## If FALSE, it will be justified according to the 'just' argument
-                      just = "r"         ## just is the justification to use for the columns, "r", "l", or "c"
-                      ){
-  ## Returns a character vector used in the align argument of the xtable command.
-  ## e.g. posterior output tables, reference point tables. Most tables really.
-  ## num is the number of columns in the table
+                      first.left = TRUE,
+                      just = "r"){
+
   if(first.left){
     align <- c("l", "l")
   }else{
@@ -574,10 +930,21 @@ get.align <- function(num,
   for(i in 1:(num-1)){
     align <- c(align, just)
   }
-  return(align)
+  align
 }
 
+#' Make a vector of rich color strings based on several distributions
+#'
+#' @param n The number of color strings to return
+#' @param alpha The transparency of the colors
+#'
+#' @return A vector of rich color strings based on several distributions
+#' @export
+#'
+#' @examples
+#' \donttest
 rc <- rich.colors.short <- function(n, alpha = 1){
+
   x <- seq(0, 1, length = n)
   r <- 1/(1 + exp(20 - 35 * x))
   g <- pmin(pmax(0, -0.8 + 6 * x - 5 * x^2), 1)
@@ -586,44 +953,59 @@ rc <- rich.colors.short <- function(n, alpha = 1){
   rich.vector <- apply(rgb.m, 1, function(v) rgb(v[1],v[2],v[3],alpha = alpha))
 }
 
-plotBars.fn <- function(x,y,gap=0,add=F,ciCol="black",ciLty=1,ciLwd=1,...) {
-  ## x is the x axis values (i.e., years)
-  ## y is a data frame with:
-  ## value: estimate (point) to plot
-  ## lo: lower CI
-  ## hi: higher CI
+#' Plot bars (confidence intervals)
+#'
+#' @param x The x-axis values
+#' @param y A data frame with columns:
+#'  value: estimate (point) to plot
+#'  lo: lower CI
+#'  hi: higher CI
+#'
+#' @param gap To leave a small gap around the point set this to be non-zero
+#' @param add TRUE/FALSE Add points also
+#' @param ciCol Color of the bars
+#' @param ciLty Line type of the bars
+#' @param ciLwd Line width of the bars
+#' @param ...
+#'
+#' @return Nothing
+#' @export
+#'
+#' @examples
+#' \donttest
+plotBars.fn <- function(x,
+                        y,
+                        gap = 0,
+                        scalar = 1e6,
+                        add = FALSE,
+                        ciCol = "black",
+                        ciLty = 1,
+                        ciLwd = 1,
+                        ...) {
 
-  if(!add) plot(x,y$value,...)
-  if(add) points(x,y$value,...)
-  segments(x,y$lo,x,y$value-gap,col=ciCol,lty=ciLty,lwd=ciLwd)
-  segments(x,y$hi,x,y$value+gap,col=ciCol,lty=ciLty,lwd=ciLwd)
+  if(!add) plot(x, y$value / scalar, ...)
+  if(add) points(x, y$value / scalar, ...)
+  segments(x, y$lo / scalar, x, y$value / scalar - gap, col = ciCol, lty = ciLty, lwd = ciLwd)
+  segments(x, y$hi / scalar, x, y$value / scalar + gap, col = ciCol, lty = ciLty, lwd = ciLwd)
 }
 
-plotBars.fn <- function(x,y,gap=0,scalar=1e6,add=F,ciCol="black",ciLty=1,ciLwd=1,...) {
-  ## x is the x axis values (i.e., years)
-  ## y is a data frame with:
-  ## value: estimate (point) to plot
-  ## lo: lower CI
-  ## hi: higher CI
-
-  if(!add) plot(x,y$value/scalar,...)
-  if(add) points(x,y$value/scalar,...)
-  segments(x,y$lo/scalar,x,y$value/scalar-gap,col=ciCol,lty=ciLty,lwd=ciLwd)
-  segments(x,y$hi/scalar,x,y$value/scalar+gap,col=ciCol,lty=ciLty,lwd=ciLwd) 
-}
-
-panel.letter <- function(letter){
-  # adds letters to plot panels
-  # letter is the letter to place on the panel
-  usr <- par("usr")
-  inset.x <- 0.05*(usr[2]-usr[1])
-  inset.y <- 0.05*(usr[4]-usr[3])
-  text(usr[1]+inset.x,usr[4]-inset.y,paste("(",letter,")",sep=""),cex=1.,font=1)
-}
-
+#' Add a polygon to the current timeseries plot
+#'
+#' @param yrvec A vector of years on the x-axis
+#' @param lower A vector of the y-values for the lower part of the polygon envelope
+#' @param upper A vector of the y-values for the upper part of the polygon envelope
+#' @param color Color of the lines around the polygon
+#' @param shade.col Color of the shade for the envelope. If NULL, the color argument
+#'   will be used
+#'
+#' @return Nothing
+#' @export
+#'
+#' @examples
+#' \donttest
 addpoly <- function(yrvec, lower, upper, color = 1, shade.col = NULL){
+
   lower[lower<0] <- 0 ## max of value or 0
-  if(is.null(shade.col)){
     shade.col <- rgb(t(col2rgb(color)), alpha = 0.2 * 255, maxColorValue = 255)
   }
   polygon(x = c(yrvec, rev(yrvec)),
@@ -634,53 +1016,45 @@ addpoly <- function(yrvec, lower, upper, color = 1, shade.col = NULL){
   lines(yrvec, upper, lty = 3, col = color)
 }
 
-curfnfinder <- function(skipframes=0, skipnames="(FUN)|(.+apply)|(replicate)",
-    retIfNone="Not in function", retStack=FALSE, extraPrefPerLevel="\t")
-{
-  # Get the current function name from within the function itself.
-  # Used to prepend the function name to all messages so that the
-  # user knows where the message came from.
-    prefix<-sapply(3 + skipframes+1:sys.nframe(), function(i){
-            currv<-sys.call(sys.parent(n=i))[[1]]
-            return(currv)
-        })
-    prefix[grep(skipnames, prefix)] <- NULL
-    prefix<-gsub("function \\(.*", "do.call", prefix)
-    if(length(prefix)==0)
-    {
-        return(retIfNone)
-    }
-    else if(retStack)
-    {
-        return(paste(rev(prefix), collapse = "|"))
-    }
-    else
-    {
-        retval<-as.character(unlist(prefix[1]))
-        if(length(prefix) > 1)
-        {
-            retval<-paste(paste(rep(extraPrefPerLevel, length(prefix) - 1), collapse=""), retval, sep="")
-        }
-        return(retval)
-    }
-}
-
+#' Writes out some information about the calling function to screen
+#'
+#' @param ...
+#' @param file See cat() function
+#' @param sep See cat() function
+#' @param fill See cat() function
+#' @param labels See cat() function
+#' @param append See cat() function
+#' @param prefix Numeric value
+#'
+#' @return Nothing
+#' @export
+#'
+#' @examples
+#' \donttest
 catw <- function(..., file = "", sep = " ", fill = FALSE, labels = NULL,
-    append = FALSE, prefix=0)
-{
-  # writes out some innformation on the calling function to screen
-    if(is.numeric(prefix))
-    {
-        prefix<-curfnfinder(skipframes=prefix+1) #note: the +1 is there to avoid returning catw itself
-        prefix<-paste(prefix, ": ", sep="")
+                 append = FALSE, prefix = 0){
+
+    if(is.numeric(prefix)){
+      ## the +1 is there to avoid returning catw itself
+      prefix <- cur.fn.finder(skipframes = prefix + 1)
+      prefix <- paste0(prefix, ": ")
     }
     cat(prefix, ..., format(Sys.time(), "(%Y-%m-%d %H:%M:%S)"), "\n",
         file = file, sep = sep, fill = fill, labels = labels, append = append)
 }
 
+#' Adds letters to plot panels
+#'
+#' @param letter The letter to add. If numeric, use letter at that place
+#'   in the alphabet.
+#'
+#' @return Nothing
+#' @export
+#'
+#' @examples
+#' \donttest
 panel.letter <- function(letter){
-  ## Adds letters to plot panels
-  ## letter - the letter to place on the panel
+
   usr <- par("usr")
   inset.x <- 0.05 * (usr[2] - usr[1])
   inset.y <- 0.05 * (usr[4] - usr[3])
@@ -696,14 +1070,22 @@ panel.letter <- function(letter){
        font = 1)
 }
 
+#' Generate a pretty latex version of the parameter name
+#'
+#' @param name Parameter name
+#' @param addToQ An integer to the parameter name for the q's. This is necessary
+#'   because iscam sets the q parameter names to 1, 2, 3... regardless of the
+#'   gear number. i.e. if gear 1 is a trawl fishery and gear 2 is a survey,
+#'   iscam will call q1 the survey gear. We must add 1 to it to get q2 to
+#'   accurately portray the survey gear number
+#'
+#' @return A pretty version of the parameter name found in variable 'name'
+#'   or NULL if the name was not found
+#' @export
+#'
+#' @examples
 get.latex.name <- function(name, addToQ = 0){
-  ## Return a pretty version of the parameter name found in variable 'name'
-  ##
-  ## addToQ - an integer to the parameter name for the q's. This is necessary
-  ##  because iscam sets the q parameter names to 1, 2, 3... regardless of the
-  ##  gear number. i.e. if gear 1 is a trawl fishery and gear 2 is a survey,
-  ##  iscam will call q1 the survey gear. We must add 1 to it to get q2 to
-  ##  accurately portray the survey gear number
+
   if(name == "ro") return(expression("R"[0]))
   if(name == "rbar") return(expression(bar("R")))
   if(name == "rinit") return(expression(bar("R")[init]))
@@ -748,19 +1130,31 @@ get.latex.name <- function(name, addToQ = 0){
   NULL
 }
 
+#' Draw a time series confidence envelope on a device on which plot.new
+#' has already been called.
+#'
+#' @param yrs A vector of the years (x-axis values)
+#' @param quants A 3-row matrix, where the middle row is the
+#'   median and the other two are the lower and upper values for some
+#'   confidence interval.
+#' @param col Color of the lines for the envelope
+#' @param first if TRUE, plot() will be called. If FALSE, lines() will be
+#'   called.
+#' @param opacity How opaque is the envelope. Values from 0 - 99
+#' @param ...
+#'
+#' @return Nothing
+#' @export
+#'
+#' @examples
+#' \donttest
 draw.envelope <- function(yrs,
                           quants,
                           col = "black",
                           first,
                           opacity = 75,
                           ...){
-  ## Draw a time series envelope on a device on which plot.new has already
-  ##  been called.
-  ## Assumptions: quants is a 3-row matrix, where the middle row is the
-  ##  median and the other two are the lower and upper values for some
-  ##  confidence interval.
-  ## first - boolean, if TRUE, plot will be called. If FALSE, lines will be
-  ##  called.
+
   lower  <- quants[1,]
   median <- quants[2,]
   upper  <- quants[3,]
@@ -799,11 +1193,18 @@ draw.envelope <- function(yrs,
   }
 }
 
-c.model.list <- function(..., recursive = FALSE){
-  ## Extract the model class objects from the list of model lists,
-  ##  and merge them into a single model list containing all the model
-  ##  class objects.
-  ## To use: c(model.list.1, model.list.2)
+#' Extract the iscam model class objects from the list of model lists,
+#'  and merge them into a single model list containing all the iscam model
+#'  class objects.
+#'
+#' @param ...
+#'
+#' @return A list of singular iscam model objects
+#' @export
+#'
+#' @examples
+#' c(model.list.1, model.list.2)
+c.model.list <- function(...){
 
   lst <- list(...)
   ret.lst <- NULL
@@ -825,18 +1226,36 @@ c.model.list <- function(..., recursive = FALSE){
   ret.lst
 }
 
-## Calculation of sigma and tau from rho and vartheta
+#' Calculation of sigma and tau from rho and vartheta
+#'
+#' @param rho The rho parameter value
+#' @param vartheta The vartheta parameter value
+#'
+#' @return A list of length 2, first tau, second sigma
+#' @export
+#'
+#' @examples
+#' \donttest
 calc.sig.tau <- function(rho, vartheta){
-  ## Calculation of sigma and tau from rho and vartheta
 
   tau <- sqrt((1 - rho) / vartheta)
   sigma <- sqrt(rho / vartheta)
   list(tau, sigma)
 }
 
+#' Make a vector of length 2 representing the number of rows and columns
+#'   to use to pack a plot in a grid
+#'
+#' @param num The number of plots
+#'
+#' @return A vector of length 2 representing the number of rows and
+#'   columns necessary to fit the plots in a panel properly
+#' @export
+#'
+#' @examples
+#' \donttest
 get.rows.cols <- function(num){
-  ## Returns a vector of length 2 representing the number of rows and columns
-  ##  to use to pack a plot in a grid.
+
   if(num <= 64 && num > 49){
     if(num <= 56){
       nside <- c(8,7)
