@@ -12,7 +12,7 @@
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}
 make.maturity.table <- function(mat,
                                 digits = 3,
                                 xcaption = "default",
@@ -84,7 +84,7 @@ make.maturity.table <- function(mat,
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}
 make.maturity.sens.table <- function(mat,
                                      which.model = 1,
                                      end.yr,

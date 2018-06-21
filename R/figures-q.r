@@ -12,7 +12,7 @@
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}
 make.q.plot <- function(models,
                         model.names = NULL,
                         ylim,

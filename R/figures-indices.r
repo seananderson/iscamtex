@@ -14,7 +14,7 @@
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}
 make.index.fit.plot <- function(models,
                                 model.names = NULL,
                                 leg = NULL,

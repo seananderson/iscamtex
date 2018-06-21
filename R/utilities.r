@@ -17,7 +17,7 @@
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}
 build.doc <- function(knit.only = FALSE,
                       make.pdf  = TRUE,
                       doc.name  = "hake-assessment"){
@@ -62,7 +62,7 @@ build.doc <- function(knit.only = FALSE,
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}{}
 f <- function(x, dec.points = 0){
   format(round(x, dec.points),
          big.mark = ",",
@@ -79,7 +79,7 @@ f <- function(x, dec.points = 0){
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}{}
 remove.asterisks <- function(x){
 
   list(apply(x,
@@ -101,7 +101,7 @@ remove.asterisks <- function(x){
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}{}
 add.asterisks <- function(x, w){
   ## Add two asterisks to the data frame in the positions
   ##  given by matrix 'where' (w)
@@ -130,7 +130,7 @@ latex.hline <- " \\hline "
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}{}
 latex.perc <- function(vec){
 
   gsub("%", "\\\\%", vec)
@@ -145,7 +145,7 @@ latex.perc <- function(vec){
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}{}
 latex.amp <- function(n = 1){
 
   paste0(rep(" &", n), " ", collapse = "")
@@ -161,7 +161,7 @@ latex.amp <- function(n = 1){
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}{}
 latex.paste <- function(vec){
 
   paste(" ", vec, " ", collapse = " & ")
@@ -175,7 +175,7 @@ latex.paste <- function(vec){
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}{}
 latex.bold <- function(txt){
 
   paste0("\\textbf{", txt, "}")
@@ -190,7 +190,7 @@ latex.bold <- function(txt){
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}{}
 latex.math.bold <- function(txt){
 
   paste0("$\\mathbf{", txt, "}$")
@@ -204,7 +204,7 @@ latex.math.bold <- function(txt){
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}{}
 latex.italics <- function(txt){
 
   paste0("\\emph{", txt, "}")
@@ -218,7 +218,7 @@ latex.italics <- function(txt){
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}{}
 latex.under <- function(txt){
 
   paste0("\\underline{", txt, "}")
@@ -239,7 +239,7 @@ latex.under <- function(txt){
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}{}
 latex.mlc <- function(latex.vec, make.bold = TRUE, math.bold = FALSE){
 
   if(make.bold){
@@ -263,7 +263,7 @@ latex.mlc <- function(latex.vec, make.bold = TRUE, math.bold = FALSE){
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}{}
 latex.mcol <- function(ncol, just, txt){
 
   paste0("\\multicolumn{", ncol, "}{", just, "}{", txt, "}")
@@ -280,7 +280,7 @@ latex.mcol <- function(ncol, just, txt){
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}{}
 latex.mrow <- function(nrow, just, txt, option = NULL){
 
   if(is.null(option)){
@@ -299,7 +299,7 @@ latex.mrow <- function(nrow, just, txt, option = NULL){
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}{}
 latex.size.str <- function(fnt.size, spc.size){
 
   paste0("\\fontsize{", fnt.size, "}{", spc.size, "}\\selectfont")
@@ -315,7 +315,7 @@ latex.size.str <- function(fnt.size, spc.size){
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}{}
 latex.cline <- function(cols){
 
   paste0("\\cline{", cols, "}")
@@ -334,7 +334,7 @@ latex.cline <- function(cols){
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}{}
 latex.cmidr <- function(cols, trim = "r"){
 
   paste0("\\cmidrule(", trim, "){", cols, "}")
@@ -349,7 +349,7 @@ latex.cmidr <- function(cols, trim = "r"){
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}{}
 latex.subscr <- function(main.txt, subscr.txt){
 
   paste0(main.txt, "\\subscr{", subscr.txt, "}")
@@ -366,7 +366,7 @@ latex.subscr <- function(main.txt, subscr.txt){
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}{}
 latex.subscr.ital <- function(main.txt, subscr.txt){
 
   paste0("\\emph{", main.txt, "}\\subscr{", subscr.txt, "}")
@@ -400,7 +400,7 @@ latex.supscr <- function(main.txt, supscr.txt){
 #'   will be calculated and the quantiles returned.
 #'
 #' @examples
-#' \donttest
+#' \donttest{}{}
 get.quants <- function(data,
                        probs){
 
@@ -422,7 +422,7 @@ get.quants <- function(data,
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}{}
 install.packages.if.needed <- function(package.name){
 
   if(!(package.name %in% rownames(installed.packages()))){
@@ -440,7 +440,7 @@ install.packages.if.needed <- function(package.name){
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}{}
 split.prior.info <- function(prior.str,
                              dec.points = 1,
                              first.to.lower = FALSE){
@@ -472,7 +472,7 @@ split.prior.info <- function(prior.str,
 #'   object. i.e. model$wtatage
 #'
 #' @examples
-#' \donttest
+#' \donttest{}{}
 cohortCatch <- function(cohort, catage, ages = 0:20) {
 
   cohort.yrs <- cohort + ages
@@ -537,7 +537,7 @@ get.age.prop <- function(vec, place = 1){
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}{}
 get.shade <- function(color, opacity){
 
   if(!(opacity %% 1 == 0) || opacity<0 || opacity>99){
@@ -579,7 +579,7 @@ get.shade <- function(color, opacity){
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}{}
 remove.all.objects.except <- function(vars){
 
   vars <- c(vars, "remove.all.objects.except")
@@ -624,7 +624,7 @@ pad.num <- function(num, digits = 0){
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}{}
 print.model.message <- function(model.dir.names, model.names, group, model.type){
 
   cat0("***")
@@ -650,7 +650,7 @@ print.model.message <- function(model.dir.names, model.names, group, model.type)
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}{}
 curr.fn.finder <- function(skipframes = 0,
                            skipnames = "(FUN)|(.+apply)|(replicate)",
                            ret.if.none = "Not in function",
@@ -682,7 +682,7 @@ curr.fn.finder <- function(skipframes = 0,
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}{}
 get.curr.func.name <- function(){
 
   func.name <- curr.fn.finder(skipframes = 1) # skipframes=1 is there to avoid returning getCurrFunc itself
@@ -701,7 +701,7 @@ get.curr.func.name <- function(){
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}{}
 cat0 <- function(...){
 
   cat(..., "\n", sep = "")
@@ -881,7 +881,7 @@ set.elems <- function(...) {
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}{}
 cbind.fill <- function(...){
 
   nm <- list(...)
@@ -900,7 +900,7 @@ cbind.fill <- function(...){
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}{}
 strip.columns <- function(vec, names){
 
   vec[!names(vec) %in% names]
@@ -917,7 +917,7 @@ strip.columns <- function(vec, names){
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}{}
 get.align <- function(num,
                       first.left = TRUE,
                       just = "r"){
@@ -942,7 +942,7 @@ get.align <- function(num,
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}{}
 rc <- rich.colors.short <- function(n, alpha = 1){
 
   x <- seq(0, 1, length = n)
@@ -972,7 +972,7 @@ rc <- rich.colors.short <- function(n, alpha = 1){
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}{}
 plotBars.fn <- function(x,
                         y,
                         gap = 0,
@@ -1002,7 +1002,7 @@ plotBars.fn <- function(x,
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}{}
 addpoly <- function(yrvec, lower, upper, color = 1, shade.col = NULL){
 
   lower[lower<0] <- 0 ## max of value or 0
@@ -1030,7 +1030,7 @@ addpoly <- function(yrvec, lower, upper, color = 1, shade.col = NULL){
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}{}
 catw <- function(..., file = "", sep = " ", fill = FALSE, labels = NULL,
                  append = FALSE, prefix = 0){
 
@@ -1052,7 +1052,7 @@ catw <- function(..., file = "", sep = " ", fill = FALSE, labels = NULL,
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}{}
 panel.letter <- function(letter){
 
   usr <- par("usr")
@@ -1147,7 +1147,7 @@ get.latex.name <- function(name, addToQ = 0){
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}{}
 draw.envelope <- function(yrs,
                           quants,
                           col = "black",
@@ -1235,7 +1235,7 @@ c.model.list <- function(...){
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}{}
 calc.sig.tau <- function(rho, vartheta){
 
   tau <- sqrt((1 - rho) / vartheta)
@@ -1253,7 +1253,7 @@ calc.sig.tau <- function(rho, vartheta){
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}{}
 get.rows.cols <- function(num){
 
   if(num <= 64 && num > 49){

@@ -21,7 +21,7 @@
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}
 load.iscam.files <- function(model.dir,
                              burnin = 1000,
                              thin = 1,
@@ -98,7 +98,7 @@ load.iscam.files <- function(model.dir,
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}
 delete.rdata.files <- function(del.dir = model.dir){
 
   dirs <- list.dirs(del.dir, recursive = FALSE)
@@ -133,7 +133,7 @@ delete.rdata.files <- function(del.dir = model.dir){
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}
 delete.dirs <- function(models.dir = model.dir,
                         sub.dir = NULL){
 
@@ -171,7 +171,7 @@ delete.dirs <- function(models.dir = model.dir,
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}
 create.rdata.file <- function(models.dir = model.dir,
                               model.name,
                               ovwrt.rdata = FALSE,
@@ -270,7 +270,7 @@ create.rdata.file <- function(models.dir = model.dir,
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}
 create.rdata.file.retro <- function(model.dir,
                                     ovwrt.rdata = FALSE,
                                     load.proj = TRUE,
@@ -345,7 +345,7 @@ create.rdata.file.retro <- function(model.dir,
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}
 load.models <- function(models.dir,
                         model.dir.names){
 
@@ -385,7 +385,7 @@ load.models <- function(models.dir,
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}
 fetch.file.names <- function(path,
                              filename
                              ){
@@ -426,7 +426,7 @@ fetch.file.names <- function(path,
 #'   any number of alphanumeric characters (includes underscore and .)
 #'
 #' @examples
-#' \donttest
+#' \donttest{}
 read.report.file <- function(fn){
 
   dat <- readLines(fn, warn = FALSE)
@@ -494,7 +494,7 @@ read.report.file <- function(fn){
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}
 read.data.file <- function(file = NULL,
                            verbose = FALSE){
 
@@ -737,7 +737,7 @@ read.data.file <- function(file = NULL,
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}
 read.control.file <- function(file = NULL,
                               num.gears = NULL,
                               num.age.gears = NULL,
@@ -938,7 +938,7 @@ read.control.file <- function(file = NULL,
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}
 read.projection.file <- function(file = NULL,
                                  verbose = FALSE){
 
@@ -1012,7 +1012,7 @@ read.projection.file <- function(file = NULL,
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}
 read.par.file <- function(file = NULL,
                           verbose = FALSE){
 
@@ -1090,7 +1090,7 @@ read.par.file <- function(file = NULL,
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}
 read.mcmc <- function(model.dir = NULL,
                       verbose = TRUE){
 
@@ -1163,7 +1163,7 @@ read.mcmc <- function(model.dir = NULL,
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}
 extract.group.matrices <- function(data = NULL,
                                    prefix = NULL){
 
@@ -1217,7 +1217,7 @@ extract.group.matrices <- function(data = NULL,
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}
 extract.area.sex.matrices <- function(data = NULL,
                                       prefix = NULL){
 
@@ -1272,7 +1272,7 @@ extract.area.sex.matrices <- function(data = NULL,
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}
 mcmc.thin <- function(mcmc.dat,
                       burnin,
                       thin){
@@ -1316,7 +1316,7 @@ mcmc.thin <- function(mcmc.dat,
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}
 calc.mcmc <- function(model,
                       burnin = 1000,
                       thin = 1,
@@ -1603,7 +1603,7 @@ calc.mcmc <- function(model,
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}
 calc.ahat <- function(model){
   if(class(model) == model.lst.class){
     model <- model[[1]]
@@ -1666,7 +1666,7 @@ calc.ahat <- function(model){
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}
 calc.probabilities <- function(model,
                                burnin,
                                thin,
@@ -1815,7 +1815,7 @@ calc.probabilities <- function(model,
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}
 get.estimated.params <- function(mc){
 
   posts <- apply(mc,
@@ -1842,7 +1842,7 @@ get.estimated.params <- function(mc){
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}
 calc.logs <- function(mc,
                       log.params = c("^ro$",
                                      "^m$",
@@ -1884,7 +1884,7 @@ calc.logs <- function(mc,
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}
 fix.m <- function(mc){
 
   grp <- grep("m[12]", colnames(mc))
@@ -1905,7 +1905,7 @@ fix.m <- function(mc){
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}
 calc.mpd.logs <- function(mpd,
                           log.params = c("^ro$",
                                          "^m$",

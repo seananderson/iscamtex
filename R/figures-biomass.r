@@ -20,7 +20,7 @@
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}
 make.biomass.mcmc.plot <- function(models,
                                    model.names = NULL,
                                    ylim,
@@ -168,7 +168,7 @@ make.biomass.mcmc.plot <- function(models,
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}
 make.depletion.mcmc.plot <- function(models,
                                      model.names = NULL,
                                      ylim = c(0, 1),
@@ -261,7 +261,7 @@ make.depletion.mcmc.plot <- function(models,
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}
 make.biomass.retro.mpd.plot <- function(base.model,
                                         models,
                                         model.names = NULL,

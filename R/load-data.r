@@ -8,7 +8,7 @@
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}
 load.csv <- function(data.path,
                       fn,
                       header = TRUE){

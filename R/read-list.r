@@ -22,7 +22,7 @@
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}
 read.list <- function(fn){
 
   dat <- readLines(fn, warn = FALSE)

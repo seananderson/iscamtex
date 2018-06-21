@@ -11,7 +11,7 @@
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}
 make.activities.table <- function(tab,
                                   xcaption = "default",
                                   xlabel   = "default",
@@ -82,7 +82,7 @@ make.activities.table <- function(tab,
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}
 make.management.table <- function(tab,
                                   xcaption = "default",
                                   xlabel   = "default",

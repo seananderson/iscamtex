@@ -15,7 +15,7 @@
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}
 strip.areas.groups <- function(dat){
 
   pnames <- names(dat)
@@ -47,7 +47,7 @@ strip.areas.groups <- function(dat){
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}
 strip.static.params <- function(model, dat){
 
   # Check the control file to see which parameters were static

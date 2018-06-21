@@ -17,7 +17,7 @@
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}
 make.m.plot <- function(models,
                         model.names = NULL,
                         ylim,

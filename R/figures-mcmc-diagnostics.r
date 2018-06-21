@@ -24,7 +24,7 @@
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}
 make.priors.posts.plot <- function(model,
                                    priors.only = TRUE){
 
@@ -159,7 +159,7 @@ make.priors.posts.plot <- function(model,
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}
 plot.marg <- function(xx,
                       breaks = "sturges",
                       ex.factor = 1.0,

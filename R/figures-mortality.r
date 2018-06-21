@@ -16,7 +16,7 @@
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}
 make.natural.mort.mcmc.plot <- function(models,
                                         model.names = NULL,
                                         which.gear = 1,

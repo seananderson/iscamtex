@@ -12,7 +12,7 @@
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}
 make.decision.table <- function(model,
                                 digits = 3,
                                 xcaption = "default",

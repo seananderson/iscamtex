@@ -15,7 +15,7 @@
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}
 make.likelihood.table <- function(models,
                                   which = 1,
                                   digits = 3,

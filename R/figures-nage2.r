@@ -15,7 +15,7 @@
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}
 make.nage2.plot <- function(models,
                             model.names = NULL,
                             ylim,

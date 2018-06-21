@@ -11,7 +11,7 @@
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}
 make.parameters.table <- function(model,
                                   xcaption = "default",
                                   xlabel   = "default",
@@ -239,7 +239,7 @@ make.parameters.table <- function(model,
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}
 make.catchability.parameters.table <- function(am1.lst,
                                                am2.lst = NULL,
                                                digits = 3,
@@ -402,7 +402,7 @@ make.catchability.parameters.table <- function(am1.lst,
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}
 make.parameters.est.table <- function(model,
                                       digits = 3,
                                       xcaption = "default",
@@ -516,7 +516,7 @@ make.parameters.est.table <- function(model,
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}
 make.ref.points.table <- function(model.am2,
                                   model.am1,
                                   digits = 3,
@@ -635,7 +635,7 @@ make.ref.points.table <- function(model.am2,
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}
 make.value.table <- function(model,
                              type,
                              syr,
@@ -708,7 +708,7 @@ make.value.table <- function(model,
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}
 make.biomass.depletion.table <- function(model,
                                          syr,
                                          digits = 3,
@@ -787,7 +787,7 @@ make.biomass.depletion.table <- function(model,
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}
 make.sens.parameter.table <- function(tab,
                                       xcaption = "default",
                                       xlabel   = "default",
@@ -829,7 +829,7 @@ make.sens.parameter.table <- function(tab,
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}
 make.sens.q.table <- function(models,
                               model.names,
                               digits = 3,
@@ -896,7 +896,7 @@ make.sens.q.table <- function(models,
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}
 make.variance.table <- function(var,
                                 which.model = 1,
                                 digits = 3,
@@ -1054,7 +1054,7 @@ make.variance.table <- function(var,
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}
 make.catchability.parameters.table.q.sens <- function(qa.lst,
                                                       qb.lst,
                                                       qc.lst,

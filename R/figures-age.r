@@ -10,7 +10,7 @@
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}
 make.age.comp.estimates.plot <- function(model,
                                          which.gear,
                                          fg = gray(level = 0.1, alpha = 0.5),
@@ -71,7 +71,7 @@ make.age.comp.estimates.plot <- function(model,
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}
 make.age.comp.fit.plot <- function(model,
                                    which.gear,
                                    fg = gray(level = 0.1, alpha = 0.5),
@@ -132,7 +132,7 @@ make.age.comp.fit.plot <- function(model,
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}
 make.age.comp.residuals.plot <- function(model,
                                          which.gear,
                                          fg = gray(level = 0.1, alpha = 0.5),
@@ -181,7 +181,7 @@ make.age.comp.residuals.plot <- function(model,
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}
 make.age.comp.data.plot <- function(model,
                                     which.gear){
 

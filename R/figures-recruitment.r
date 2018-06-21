@@ -20,7 +20,7 @@
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}
 make.recr.mcmc.plot <- function(models,
                                 model.names = NULL,
                                 type = 1,
@@ -142,7 +142,7 @@ make.recr.mcmc.plot <- function(models,
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}
 make.recr.retro.mpd.plot <- function(base.model,
                                      models,
                                      model.names = NULL,
