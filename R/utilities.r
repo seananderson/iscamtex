@@ -1006,8 +1006,8 @@ plotBars.fn <- function(x,
 addpoly <- function(yrvec, lower, upper, color = 1, shade.col = NULL){
 
   lower[lower<0] <- 0 ## max of value or 0
-    shade.col <- rgb(t(col2rgb(color)), alpha = 0.2 * 255, maxColorValue = 255)
-  }
+  shade.col <- rgb(t(col2rgb(color)), alpha = 0.2 * 255, maxColorValue = 255)
+
   polygon(x = c(yrvec, rev(yrvec)),
           y = c(lower, rev(upper)),
           border = NA,
