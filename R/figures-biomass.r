@@ -11,16 +11,13 @@
 #' @param show.bo.line Show the reference lines 0.2 and 0.4bo
 #' @param ind.letter A letter to show on the plot (for panel plots)
 #' @param leg Position of the legend. NULL means no legend is shown
-#' @param ...
+#' @param ... Other graphical arguments
 #'
 #' @details Plot the biomass with credibility intervals for the mcmc
 #'   cases of the models
 #'
 #' @return Nothing
 #' @export
-#'
-#' @examples
-#' \donttest{}
 make.biomass.mcmc.plot <- function(models,
                                    model.names = NULL,
                                    ylim,
@@ -159,16 +156,13 @@ make.biomass.mcmc.plot <- function(models,
 #' @param append.base.txt Text to append to the name of the first model
 #' @param ind.letter A letter to show on the plot (for panel plots)
 #' @param leg Position of the legend. NULL means no legend is shown
-#' @param ...
+#' @param ... Other graphical arguments
 #'
 #' @details Plot the relative biomass with credibility intervals for the mcmc
 #'   cases of the models
 #'
 #' @return Nothing
 #' @export
-#'
-#' @examples
-#' \donttest{}
 make.depletion.mcmc.plot <- function(models,
                                      model.names = NULL,
                                      ylim = c(0, 1),
@@ -255,13 +249,10 @@ make.depletion.mcmc.plot <- function(models,
 #' @param ind.letter A letter to show on the plot (for panel plots)
 #' @param leg Position of the legend. NULL means no legend is shown
 #' @param color.brew.class The RColorBrewer class, e.g. "Paired"
-#' @param ...
+#' @param ... Other graphical arguments
 #'
 #' @return Nothing
 #' @export
-#'
-#' @examples
-#' \donttest{}
 make.biomass.retro.mpd.plot <- function(base.model,
                                         models,
                                         model.names = NULL,
@@ -312,7 +303,7 @@ make.biomass.retro.mpd.plot <- function(base.model,
   base.yrs <- base.model$mpd$syr:(base.model$mpd$nyr + 1)
   base.sbt <- base.model$mpd$sbt
 
-  cols <- colorRampPalette(c("red", "blue", "green"))(length(model.names))
+  cols <- grDevices:::colorRampPalette(c("red", "blue", "green"))(length(model.names))
 
   if(leg){
     layout(1:2, heights = c(1, 5))

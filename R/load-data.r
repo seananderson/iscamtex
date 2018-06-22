@@ -6,9 +6,6 @@
 #'
 #' @return Data frame of the csv
 #' @export
-#'
-#' @examples
-#' \donttest{}
 load.csv <- function(data.path,
                       fn,
                       header = TRUE){

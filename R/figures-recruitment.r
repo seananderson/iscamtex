@@ -11,16 +11,13 @@
 #' @param show.mean Show the mean line on the plot
 #' @param ind.letter A letter to show on the plot (for panel plots)
 #' @param leg Position of the legend. NULL means no legend is shown
-#' @param ...
+#' @param ... Other graphical arguments
 #'
 #' @details Plot the recruitment or deviations with credibility intervals
 #'   for MCMC cases for iscam models
 #'
 #' @return Nothing
 #' @export
-#'
-#' @examples
-#' \donttest{}
 make.recr.mcmc.plot <- function(models,
                                 model.names = NULL,
                                 type = 1,
@@ -136,13 +133,10 @@ make.recr.mcmc.plot <- function(models,
 #' @param ind.letter A letter to show on the plot (for panel plots)
 #' @param leg Position of the legend. NULL means no legend is shown
 #' @param color.brew.class RColorBrewer class. e.g. "Paired"
-#' @param ...
+#' @param ... Other graphical arguments
 #'
 #' @return Nothing
 #' @export
-#'
-#' @examples
-#' \donttest{}
 make.recr.retro.mpd.plot <- function(base.model,
                                      models,
                                      model.names = NULL,
@@ -183,7 +177,7 @@ make.recr.retro.mpd.plot <- function(base.model,
   base.yrs <- (base.model$mpd$syr + 2):base.model$mpd$nyr
   base.rt <- base.model$mpd$rt
 
-  cols <- colorRampPalette(c("red", "blue", "green"))(length(model.names))
+  cols <- grDevices:::colorRampPalette(c("red", "blue", "green"))(length(model.names))
 
   if(leg){
     layout(1:2, heights = c(1, 5))

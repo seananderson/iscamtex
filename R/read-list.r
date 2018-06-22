@@ -20,9 +20,6 @@
 #'
 #' @return a list that resembles an ADMB .rep file
 #' @export
-#'
-#' @examples
-#' \donttest{}
 read.list <- function(fn){
 
   dat <- readLines(fn, warn = FALSE)

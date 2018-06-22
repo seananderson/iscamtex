@@ -13,9 +13,6 @@
 #'
 #' @return An xtable
 #' @export
-#'
-#' @examples
-#' \donttest{}
 make.likelihood.table <- function(models,
                                   which = 1,
                                   digits = 3,

@@ -8,9 +8,6 @@
 #'
 #' @return Nothing
 #' @export
-#'
-#' @examples
-#' \donttest{}
 make.age.comp.estimates.plot <- function(model,
                                          which.gear,
                                          fg = gray(level = 0.1, alpha = 0.5),
@@ -69,9 +66,6 @@ make.age.comp.estimates.plot <- function(model,
 #'
 #' @return Nothing
 #' @export
-#'
-#' @examples
-#' \donttest{}
 make.age.comp.fit.plot <- function(model,
                                    which.gear,
                                    fg = gray(level = 0.1, alpha = 0.5),
@@ -130,9 +124,6 @@ make.age.comp.fit.plot <- function(model,
 #'
 #' @return Nothing
 #' @export
-#'
-#' @examples
-#' \donttest{}
 make.age.comp.residuals.plot <- function(model,
                                          which.gear,
                                          fg = gray(level = 0.1, alpha = 0.5),
@@ -159,16 +150,16 @@ make.age.comp.residuals.plot <- function(model,
   comp.dat <- as.matrix(comp.dat[, -seq(1, 5)])
   obs.prop <- prop.table(comp.dat, 1)
 
-  plotBubbles(t(resid.dat),
-              xval = yrs,
-              yval = ages,
-              size = 0.1,
-              powr = 0.5,
-              xlab = "Year",
-              ylab = "Age",
-              las = 1,
-              cex = 1.25,
-              axes = FALSE)
+  PBSmodelling::plotBubbles(t(resid.dat),
+                            xval = yrs,
+                            yval = ages,
+                            size = 0.1,
+                            powr = 0.5,
+                            xlab = "Year",
+                            ylab = "Age",
+                            las = 1,
+                            cex = 1.25,
+                            axes = FALSE)
   axis(1, at = yrs, labels = yrs)
 }
 
@@ -179,23 +170,20 @@ make.age.comp.residuals.plot <- function(model,
 #'
 #' @return Nothing
 #' @export
-#'
-#' @examples
-#' \donttest{}
 make.age.comp.data.plot <- function(model,
                                     which.gear){
 
   a <- model$dat$age.comps[[which.gear]]
   yrs <- a[,1]
   a <- a[,-c(1, 2, 3, 4, 5)]
-  plotBubbles(t(a),
-              xval = yrs,
-              yval = colnames(a),
-              size = 0.1,
-              powr = 0.5,
-              xlab = "Year",
-              ylab = "Age",
-              cex = 0.75)
+  PBSmodelling::plotBubbles(t(a),
+                           xval = yrs,
+                           yval = colnames(a),
+                           size = 0.1,
+                           powr = 0.5,
+                           xlab = "Year",
+                           ylab = "Age",
+                           cex = 0.75)
 ##              axes = FALSE)
 
 }

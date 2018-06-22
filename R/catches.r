@@ -23,7 +23,7 @@
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}
 make.catches.table <- function(catches,
                                start.yr,
                                end.yr,
@@ -195,7 +195,7 @@ make.catches.table <- function(catches,
 #' @export
 #'
 #' @examples
-#' \donttest
+#' \donttest{}
 make.catches.plot <- function(catches,
                               gear.names,
                               leg.y.loc = 430,

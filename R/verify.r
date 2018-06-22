@@ -9,9 +9,6 @@
 #'
 #' @return Nothing
 #' @export
-#'
-#' @examples
-#' \donttest{}
 verify.models <- function(model.dir, model.dir.names, model.names){
 
   model.dirs <- file.path(model.dir, model.dir.names)
@@ -41,9 +38,6 @@ verify.models <- function(model.dir, model.dir.names, model.names){
 #'
 #' @return Nothing
 #' @export
-#'
-#' @examples
-#' \donttest{}
 verify.catch.levels <- function(lst, inds, forecast.yrs){
 
   ## Check that it is a list, and that each item is also a list of length 3

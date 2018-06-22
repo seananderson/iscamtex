@@ -13,9 +13,6 @@
 #'
 #' @return The original data frame with the area and group prefixes removed from the column names
 #' @export
-#'
-#' @examples
-#' \donttest{}
 strip.areas.groups <- function(dat){
 
   pnames <- names(dat)
@@ -37,7 +34,7 @@ strip.areas.groups <- function(dat){
 #' Strip static parameters from MCMC output data
 #'
 #' @param model An iscam model object
-#' @param dat
+#' @param dat A vector of the parameter names to remove
 #'
 #' @details Strip out the static (non-estimated) parameters from the mcmc output data
 #'   for the given scenario. We only need to see estimated parameters on the
@@ -45,12 +42,9 @@ strip.areas.groups <- function(dat){
 #'
 #' @return The parameters data frame for the model given with static parameters removed
 #' @export
-#'
-#' @examples
-#' \donttest{}
 strip.static.params <- function(model, dat){
 
-  # Check the control file to see which parameters were static
+  ## Check the control file to see which parameters were static
   inp <- as.data.frame(model$ctl$param)
   static <- inp[inp$phz <= 0,]
   snames <- rownames(static)

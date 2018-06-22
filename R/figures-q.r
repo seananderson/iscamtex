@@ -6,13 +6,10 @@
 #' @param opacity How opaque the credibility envelopes are
 #' @param ind.letter A letter to show on the plot (for panel plots)
 #' @param leg Position of the legend. NULL means no legend is shown
-#' @param ...
+#' @param ... Other graphical arguments
 #'
 #' @return Nothing
 #' @export
-#'
-#' @examples
-#' \donttest{}
 make.q.plot <- function(models,
                         model.names = NULL,
                         ylim,

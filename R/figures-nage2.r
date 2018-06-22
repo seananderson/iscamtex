@@ -6,16 +6,13 @@
 #' @param opacity How opaque the credibility envelopes are
 #' @param ind.letter A letter to show on the plot (for panel plots)
 #' @param leg Position of the legend. NULL means no legend is shown
-#' @param ...
+#' @param ... Other graphical arguments
 #'
 #' @details Plot the estimated number of age 2's for iscam models.
 #'   These are the values found in the iscam_rt_mcmc.csv file in the final year
 #'
 #' @return Nothing
 #' @export
-#'
-#' @examples
-#' \donttest{}
 make.nage2.plot <- function(models,
                             model.names = NULL,
                             ylim,

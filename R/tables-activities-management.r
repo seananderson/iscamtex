@@ -9,9 +9,6 @@
 #'
 #' @return An xtable
 #' @export
-#'
-#' @examples
-#' \donttest{}
 make.activities.table <- function(tab,
                                   xcaption = "default",
                                   xlabel   = "default",
@@ -80,9 +77,6 @@ make.activities.table <- function(tab,
 #'
 #' @return An xtable
 #' @export
-#'
-#' @examples
-#' \donttest{}
 make.management.table <- function(tab,
                                   xcaption = "default",
                                   xlabel   = "default",

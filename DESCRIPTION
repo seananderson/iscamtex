@@ -9,3 +9,9 @@ LazyData: true
 ByteCompile: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.0.1
+Imports:
+  coda,
+  ggplot2,
+  graphics,
+  grDevices,
+  stats

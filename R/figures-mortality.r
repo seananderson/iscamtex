@@ -7,16 +7,13 @@
 #' @param opacity How opaque the credibility envelopes are
 #' @param ind.letter A letter to show on the plot (for panel plots)
 #' @param leg Position of the legend. NULL means no legend is shown
-#' @param ...
+#' @param ... Other graphical arguments
 #'
 #' @details Plot the natural mortality with credibility intervals for the mcmc
 #'   case of the models
 #'
 #' @return Nothing
 #' @export
-#'
-#' @examples
-#' \donttest{}
 make.natural.mort.mcmc.plot <- function(models,
                                         model.names = NULL,
                                         which.gear = 1,

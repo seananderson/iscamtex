@@ -10,9 +10,6 @@
 #'
 #' @return An xtable
 #' @export
-#'
-#' @examples
-#' \donttest{}
 make.decision.table <- function(model,
                                 digits = 3,
                                 xcaption = "default",

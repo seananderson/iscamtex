@@ -10,9 +10,6 @@
 #'
 #' @return An xtable
 #' @export
-#'
-#' @examples
-#' \donttest{}
 make.maturity.table <- function(mat,
                                 digits = 3,
                                 xcaption = "default",
@@ -82,9 +79,6 @@ make.maturity.table <- function(mat,
 #'
 #' @return An xtable
 #' @export
-#'
-#' @examples
-#' \donttest{}
 make.maturity.sens.table <- function(mat,
                                      which.model = 1,
                                      end.yr,

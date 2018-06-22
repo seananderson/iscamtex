@@ -10,9 +10,6 @@
 #'
 #' @return Nothing
 #' @export
-#'
-#' @examples
-#' \donttest{}
 make.selex.comparison.plot <- function(model,
                                        gear.names,
                                        show.mat = FALSE,

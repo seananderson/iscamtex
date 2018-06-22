@@ -19,9 +19,6 @@
 #'
 #' @return An iscam model object
 #' @export
-#'
-#' @examples
-#' \donttest{}
 load.iscam.files <- function(model.dir,
                              burnin = 1000,
                              thin = 1,
@@ -96,9 +93,6 @@ load.iscam.files <- function(model.dir,
 #'
 #' @return Nothing
 #' @export
-#'
-#' @examples
-#' \donttest{}
 delete.rdata.files <- function(del.dir = model.dir){
 
   dirs <- list.dirs(del.dir, recursive = FALSE)
@@ -131,9 +125,6 @@ delete.rdata.files <- function(del.dir = model.dir){
 #'
 #' @return Nothing
 #' @export
-#'
-#' @examples
-#' \donttest{}
 delete.dirs <- function(models.dir = model.dir,
                         sub.dir = NULL){
 
@@ -169,9 +160,6 @@ delete.dirs <- function(models.dir = model.dir,
 #'
 #' @return Nothing
 #' @export
-#'
-#' @examples
-#' \donttest{}
 create.rdata.file <- function(models.dir = model.dir,
                               model.name,
                               ovwrt.rdata = FALSE,
@@ -268,9 +256,6 @@ create.rdata.file <- function(models.dir = model.dir,
 #'
 #' @return Nothing
 #' @export
-#'
-#' @examples
-#' \donttest{}
 create.rdata.file.retro <- function(model.dir,
                                     ovwrt.rdata = FALSE,
                                     load.proj = TRUE,
@@ -343,9 +328,6 @@ create.rdata.file.retro <- function(model.dir,
 #'
 #' @return A list of iscam model objects
 #' @export
-#'
-#' @examples
-#' \donttest{}
 load.models <- function(models.dir,
                         model.dir.names){
 
@@ -383,9 +365,6 @@ load.models <- function(models.dir,
 #'   3. Projection file name
 #'
 #' @export
-#'
-#' @examples
-#' \donttest{}
 fetch.file.names <- function(path,
                              filename
                              ){
@@ -424,9 +403,6 @@ fetch.file.names <- function(path,
 #'
 #'   A label must start with an alphabetic character followed by
 #'   any number of alphanumeric characters (includes underscore and .)
-#'
-#' @examples
-#' \donttest{}
 read.report.file <- function(fn){
 
   dat <- readLines(fn, warn = FALSE)
@@ -492,9 +468,6 @@ read.report.file <- function(fn){
 #'
 #' @return A list representing the contents of the iscam data file
 #' @export
-#'
-#' @examples
-#' \donttest{}
 read.data.file <- function(file = NULL,
                            verbose = FALSE){
 
@@ -735,9 +708,6 @@ read.data.file <- function(file = NULL,
 #'
 #' @return A list representing the contents on the iscam control file
 #' @export
-#'
-#' @examples
-#' \donttest{}
 read.control.file <- function(file = NULL,
                               num.gears = NULL,
                               num.age.gears = NULL,
@@ -936,9 +906,6 @@ read.control.file <- function(file = NULL,
 #'
 #' @return A list representing the contents of the iscam projection file
 #' @export
-#'
-#' @examples
-#' \donttest{}
 read.projection.file <- function(file = NULL,
                                  verbose = FALSE){
 
@@ -1010,9 +977,6 @@ read.projection.file <- function(file = NULL,
 #'
 #' @return A list representing the contents of the iscam par file
 #' @export
-#'
-#' @examples
-#' \donttest{}
 read.par.file <- function(file = NULL,
                           verbose = FALSE){
 
@@ -1088,9 +1052,6 @@ read.par.file <- function(file = NULL,
 #' @return A list representing the MCMC output of the iscam model,
 #'   or NULL if there was a problem or there werer no MCMC output files
 #' @export
-#'
-#' @examples
-#' \donttest{}
 read.mcmc <- function(model.dir = NULL,
                       verbose = TRUE){
 
@@ -1161,9 +1122,6 @@ read.mcmc <- function(model.dir = NULL,
 #'
 #' @return A list of matrices, one element per group
 #' @export
-#'
-#' @examples
-#' \donttest{}
 extract.group.matrices <- function(data = NULL,
                                    prefix = NULL){
 
@@ -1215,9 +1173,6 @@ extract.group.matrices <- function(data = NULL,
 #' @return a list (area-sex) of lists (gears) of matrices, one element
 #'  per group
 #' @export
-#'
-#' @examples
-#' \donttest{}
 extract.area.sex.matrices <- function(data = NULL,
                                       prefix = NULL){
 
@@ -1270,9 +1225,6 @@ extract.area.sex.matrices <- function(data = NULL,
 #'
 #' @return an mcmc.window object (CODA package)
 #' @export
-#'
-#' @examples
-#' \donttest{}
 mcmc.thin <- function(mcmc.dat,
                       burnin,
                       thin){
@@ -1314,9 +1266,6 @@ mcmc.thin <- function(mcmc.dat,
 #'
 #' @return A list of each parameter for which quantiles were calculated
 #' @export
-#'
-#' @examples
-#' \donttest{}
 calc.mcmc <- function(model,
                       burnin = 1000,
                       thin = 1,
@@ -1601,9 +1550,6 @@ calc.mcmc <- function(model,
 #'
 #' @return A list of data frames, one for each gear
 #' @export
-#'
-#' @examples
-#' \donttest{}
 calc.ahat <- function(model){
   if(class(model) == model.lst.class){
     model <- model[[1]]
@@ -1664,9 +1610,6 @@ calc.ahat <- function(model){
 #'
 #' @return A data frame which has its names formatted for latex
 #' @export
-#'
-#' @examples
-#' \donttest{}
 calc.probabilities <- function(model,
                                burnin,
                                thin,
@@ -1813,9 +1756,6 @@ calc.probabilities <- function(model,
 #'
 #' @return A data frame of estimated parameters
 #' @export
-#'
-#' @examples
-#' \donttest{}
 get.estimated.params <- function(mc){
 
   posts <- apply(mc,
@@ -1840,9 +1780,6 @@ get.estimated.params <- function(mc){
 #'
 #' @return a data frame (mc with the log columns appended)
 #' @export
-#'
-#' @examples
-#' \donttest{}
 calc.logs <- function(mc,
                       log.params = c("^ro$",
                                      "^m$",
@@ -1882,9 +1819,6 @@ calc.logs <- function(mc,
 #'
 #' @return A data frame the same as mc but with modifications (see details)
 #' @export
-#'
-#' @examples
-#' \donttest{}
 fix.m <- function(mc){
 
   grp <- grep("m[12]", colnames(mc))
@@ -1903,9 +1837,6 @@ fix.m <- function(mc){
 #'
 #' @return  a list (mpd with some new elements appended, the log-applied elements)
 #' @export
-#'
-#' @examples
-#' \donttest{}
 calc.mpd.logs <- function(mpd,
                           log.params = c("^ro$",
                                          "^m$",

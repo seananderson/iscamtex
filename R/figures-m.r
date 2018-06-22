@@ -11,13 +11,10 @@
 #' @param show.bo.line Show the reference lines 0.2 and 0.4bo
 #' @param ind.letter A letter to show on the plot (for panel plots)
 #' @param leg Position of the legend. NULL means no legend is shown
-#' @param ...
+#' @param ... Other graphical arguments
 #'
 #' @return Nothing
 #' @export
-#'
-#' @examples
-#' \donttest{}
 make.m.plot <- function(models,
                         model.names = NULL,
                         ylim,

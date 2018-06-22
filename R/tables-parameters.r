@@ -9,9 +9,6 @@
 #'
 #' @return An xtable
 #' @export
-#'
-#' @examples
-#' \donttest{}
 make.parameters.table <- function(model,
                                   xcaption = "default",
                                   xlabel   = "default",
@@ -237,9 +234,6 @@ make.parameters.table <- function(model,
 #'
 #' @return An xtable
 #' @export
-#'
-#' @examples
-#' \donttest{}
 make.catchability.parameters.table <- function(am1.lst,
                                                am2.lst = NULL,
                                                digits = 3,
@@ -391,7 +385,7 @@ make.catchability.parameters.table <- function(am1.lst,
 #' Produces an xtable with parameter estimates and priors
 #'
 #' @param model An iscam model object
-#' @param digits Number of decimal points on % columns
+#' @param digits Number of decimal points on percent columns
 #' @param xcaption Caption to appear in the calling document
 #' @param xlabel The label used to reference the table in latex
 #' @param font.size Size of the font for the table
@@ -400,9 +394,6 @@ make.catchability.parameters.table <- function(am1.lst,
 #'
 #' @return An xtable
 #' @export
-#'
-#' @examples
-#' \donttest{}
 make.parameters.est.table <- function(model,
                                       digits = 3,
                                       xcaption = "default",
@@ -514,9 +505,6 @@ make.parameters.est.table <- function(model,
 #'
 #' @return An xtable
 #' @export
-#'
-#' @examples
-#' \donttest{}
 make.ref.points.table <- function(model.am2,
                                   model.am1,
                                   digits = 3,
@@ -633,9 +621,6 @@ make.ref.points.table <- function(model.am2,
 #'
 #' @return An xtable
 #' @export
-#'
-#' @examples
-#' \donttest{}
 make.value.table <- function(model,
                              type,
                              syr,
@@ -706,9 +691,6 @@ make.value.table <- function(model,
 #'
 #' @return An xtable
 #' @export
-#'
-#' @examples
-#' \donttest{}
 make.biomass.depletion.table <- function(model,
                                          syr,
                                          digits = 3,
@@ -785,9 +767,6 @@ make.biomass.depletion.table <- function(model,
 #'
 #' @return An xtable
 #' @export
-#'
-#' @examples
-#' \donttest{}
 make.sens.parameter.table <- function(tab,
                                       xcaption = "default",
                                       xlabel   = "default",
@@ -827,9 +806,6 @@ make.sens.parameter.table <- function(tab,
 #'
 #' @return An xtable
 #' @export
-#'
-#' @examples
-#' \donttest{}
 make.sens.q.table <- function(models,
                               model.names,
                               digits = 3,
@@ -894,9 +870,6 @@ make.sens.q.table <- function(models,
 #'
 #' @return An xtable
 #' @export
-#'
-#' @examples
-#' \donttest{}
 make.variance.table <- function(var,
                                 which.model = 1,
                                 digits = 3,
@@ -1052,9 +1025,6 @@ make.variance.table <- function(var,
 #'
 #' @return An xtable
 #' @export
-#'
-#' @examples
-#' \donttest{}
 make.catchability.parameters.table.q.sens <- function(qa.lst,
                                                       qb.lst,
                                                       qc.lst,
